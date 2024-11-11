@@ -1,49 +1,70 @@
-import { defineUserConfig } from "vuepress";
-import type { DefaultThemeOptions } from "vuepress";
-import recoTheme from "vuepress-theme-reco";
+import { defineUserConfig } from 'vuepress';
+import type { DefaultThemeOptions } from 'vuepress';
+import recoTheme from 'vuepress-theme-reco';
 
 export default defineUserConfig({
-  title: "xdd-blog",
-  description: "Just playing around",
+  title: 'xdd-blog',
+  description: 'Just playing around',
   theme: recoTheme({
-    style: "@vuepress-reco/style-default",
-    logo: "/logo.png",
-    author: "xdd",
-    authorAvatar: "/avatar.png",
+    style: '@vuepress-reco/style-default',
+    logo: '/logo.png',
+    author: 'xdd',
+    authorAvatar: '/avatar.png',
     // docsRepo: "https://github.com/vuepress-reco/vuepress-theme-reco-next",
-    docsBranch: "main",
-    docsDir: "example",
-    lastUpdatedText: "最近更新",
+    docsBranch: 'main',
+    docsDir: 'example',
+    lastUpdatedText: '最近更新',
     autoSetSeries: true,
     // series 为原 sidebar
     series: {
-      "/docs/theme-reco/": [
+      '/docs/theme-reco/': [
         {
-          text: "知识点总结",
-          children: ["info-mation", "short-message", "desgin-pattern", "data-structure", "learn-notes", "axios", "cli", "dayjs", "inquirer", "js", "nginx","ast"]
+          text: '知识点总结',
+          children: [
+            'info-mation',
+            'short-message',
+            'desgin-pattern',
+            'data-structure',
+            'learn-notes',
+            'axios',
+            'cli',
+            'dayjs',
+            'inquirer',
+            'js',
+            'nginx',
+            'ast',
+          ],
         },
       ],
-      "/records/algorithm/": [
+      '/records/algorithm/': [
         {
-          text: "react",
-          children: ['react-source', "react-hook", "react-fiber"]
-        }
-      ]
+          text: 'react',
+          children: ['react-source', 'react-hook', 'react-fiber'],
+        },
+        {
+          text: 'vue',
+          children: ['vue-source'],
+        },
+      ],
     },
     navbar: [
       {
-        "text": "学习文档",
+        text: '学习文档',
         children: [
           {
-            "text": "文档学习",
-            "link": "/docs/theme-reco/info-mation"
+            text: '文档学习',
+            link: '/docs/theme-reco/info-mation',
           },
           {
-            "text": "React源码解析",
-            "link": "/records/algorithm/react-source"
+            text: 'React 源码解析',
+            link: '/records/algorithm/react-source',
           },
-        ]
-      }
+          {
+            text: 'Vue 源码解析',
+            link: '/records/algorithm/vue-source',
+          },
+        ],
+      },
     ],
   }),
 });
