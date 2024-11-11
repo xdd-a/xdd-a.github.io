@@ -356,6 +356,9 @@ import {test } from 'test'
 - sessionStorage 不可以在多个标签页共享数据，但是如果是用过 `window.open` 打开的标签页且不是 `__blank` 的时候，他会复制一份 sessionStorage 到新的页面。
 
 
+## Promise 介绍
+- 
+
 ## Promise面试题
 - 当调用promise的then方法的时候 会做两件事情，
   - 1、如果promise 是已完成的状态，那么then的回调函数会被推入微队列。
@@ -459,4 +462,22 @@ credentials: "include" // 告知浏览器可以将cookie暴露给前端。
  * Xhr 的解决办法
  */
 XMLHttpRequest.withCredentials:true
+```
+
+## meta 标签
+> `name` 属性，meta 表示文档级别的，应用于整个页面。
+> `http-equiv` 属性 meta 表示编译指令，提供的信息，与HTTP请求头类似。
+> `charset` 属性，meta 表示字符集声明，告诉文档使用哪种字符编码。
+> `itemprop` 属性，meta 表示用户定义的元数据。
+- 举例说明
+```html
+<!-- name 属性，与 content 连用， -->
+<!-- 作者是谁？  xdd@github.com -->
+<meta name="author" content="xdd@github.com"/>
+<!-- 页面的描述 -->
+<meta name="description" content="学习文档"/>
+<!-- 仅供移动端可用， -->
+<meta name="viewpoint" content="width=device-width, initial-scale=1.0"/>
+<!-- 指定双核浏览器，默认的渲染方式 -->
+<meta name="renderer" content="webkit" />
 ```

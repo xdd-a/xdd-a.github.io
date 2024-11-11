@@ -12,6 +12,7 @@ bannerBrand:
             欢迎光临我的主页 💁 我的职业是前端开发工程师 🧑‍💻 平时喜欢记录一些东西 ✍️
   buttons:
     - { text: react源码解析, link: '/records/algorithm/react-source' }
+    - { text: vue源码解析, link: '/records/algorithm/vue-source' }
     - { text: 关于我, link: '/blogs/other/about', type: 'plain' }
 blog:
   socialLinks:
