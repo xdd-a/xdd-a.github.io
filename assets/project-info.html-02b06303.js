@@ -1,0 +1,1 @@
+const e=JSON.parse('{"key":"v-59be11f4","path":"/docs/theme-reco/project-info.html","title":"","lang":"en-US","frontmatter":{},"headers":[],"git":{"createdTime":1715933786000,"updatedTime":1715933786000,"contributors":[{"name":"liyizu","email":"wb_liyizu@meituan.com","commits":1}]},"filePathRelative":"docs/theme-reco/project-info.md"}');export{e as data};
