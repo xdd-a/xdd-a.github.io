@@ -218,3 +218,96 @@ class Watcher {
 
 
 ```
+
+
+
+### Array 的变化侦测
+
+#### 在哪收集依赖？
+- Array 类型的数据，还是在 `getter` 中进行收集,这是因为数据本身还是在data对象下的
+
+#### 观测
+- 通过对数组的原型方法进行重写来达到观测目的
+
+```js
+const arrayProto = Array.prototype
+const arrayMethods = Object.create(arrayProto)
+
+const methodsToPatch = ['push','pop','shift','unshift','splice','sort','reverse']
+
+methodsToPatch.forEach(method => {
+    const original = arrayProto[method]
+    // 像数组的原型方法添加拦截，例如，每当执行array.push的时候，实际上执行的就是mutaor方法，这样就可以方便我们在mutaor方法中增加一些自定义的逻辑
+    Object.defineProperty(arrayMethods,method, {
+        enumerable: false,
+        configurable: true,
+        writeable: true,
+        value:function mutator(...args){
+                const result = original.apply(this, args)
+                return result
+             }
+    })
+})
+
+// 改写一下 observer类,使得支持数组观测
+class Observer {
+    constructor(value){
+        this.value = value;
+        def(value, '__ob__', this);
+        if(Array.isArray(value)){
+            const augment = hasProto
+            ? protoAugment
+            : copyAugment
+        // arrayMethods 就是基于数组原型创建的对象
+        // arrayKeys 数组的每个方法
+         augment(value, arrayMethods, arrayKeys)
+        }else{
+            this.walk(value);
+        }
+    }
+
+    // 首先判断，当前浏览器环境是否支持 __proto__
+    const hasProto = '__proto__' in {}
+    // 如果支持的话，则直接将__proto__ 设置为arrayKey
+    const protoAugment = (value, src, keys) => {
+        value.__proto__ = src;
+    }
+    // 如果不支持，则通过 defineProperty 来进行设置
+    const copyAugment = (value,src,keys)=>{
+        for(let i = 0; i < keys.length; i++){
+            const key = keys[i]
+            // 将数组的每个方法，通过拦截器加到value上。
+            def(value, key, src[key])
+        }
+    }
+}
+
+```
+
+#### 依赖收集
+- 数组的依赖收集是在 `getter` 中收集的，但是呢，数组的 `getter/setter` 方法都是在 `Observer` 类中添加的，所以依赖收集也应该在 `Observer` 类中进行
+```js
+class Observer {
+    constructor(value){
+        this.value = value;
+        this.dep = new Dep();//增加一个依赖收集器
+        def(value,'__ob__', this);
+        if(Array.isArray(value)){
+            const augment = hasProto
+            ? protoAugment
+            : copyAugment
+            // arrayMethods 就是基于数组原型创建的对象
+            // arrayKeys 数组的每个方法
+            augment(value, arrayMethods, arrayKeys)
+        }else{
+            this.walk(value);
+        }
+    }
+}
+
+
+
+
+
+
+```

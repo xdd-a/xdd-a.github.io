@@ -40,6 +40,7 @@ c + 1 // 34
 
 ## 变量提升 & 函数提升
 - 变量提升会将变量的声明提升到当前作用域的最顶端。
+- 函数式提升优先级高于变量提升。
 :::: code-group
 ::: code-group-item 变量提升
 ```js
@@ -90,6 +91,41 @@ function test(){
    function fn(){
     console.log(2)
    }
+```
+:::
+
+::: code-group-item 函数提升优先级高于变量提升
+```js
+function fn(a){
+    /**
+     * 预编译时，会发生变量提升和函数提升，而函数提升优先级高于变量提升
+     * function a(){}
+     * function d(){}
+     * var a;
+     * var b;
+     * var d;
+     * console.log(a); // function a(){}
+     * a 123;
+     * console.log(a); // 123
+     * console.log(a); // 123
+     * console.log(b); // function b(){}
+     * d = a;
+     * console.log(d); // 123;
+     */
+    console.log(a);
+    var a = 123
+    console.log(a);
+    function a(){}
+    console.log(a);
+
+    var b = function(){}
+    console.log(b);
+
+    function d(){}
+    var d = a;
+    console.log(d);
+}
+fn(1)
 ```
 :::
 ::::
