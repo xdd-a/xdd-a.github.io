@@ -33,13 +33,14 @@ export default defineUserConfig({
             'js',
             'nginx',
             'ast',
+            'vue',
           ],
         },
       ],
       '/records/algorithm/': [
         {
           text: 'react',
-          children: ['react-source', 'react-hook', 'react-fiber'],
+          children: ['react-source', 'react-hook', 'react-fiber', 'react-explanation'],
         },
         {
           text: 'vue',
